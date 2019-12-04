@@ -1,0 +1,32 @@
+"""
+#各行の和が1になる配列を作成
+pk_all = np.random.rand(2, 2**r)
+pk_all /= pk_all.sum(axis=1)[:, np.newaxis]
+
+#パラメータごとの確率
+#pk_allを2進数で桁ごとで場合分けしてpkに代入
+#例：　r=1 は最初の桁、r=2 は二番目の桁で判別
+for j in range(r): 
+    #pk( 0 | c1)を求める
+    for i in range(len(pk_all[0])):
+        num = str(format(i, '010b'))
+        if num[-j] == "0":
+            pk[0,0,9-j] += pk_all[0,i]
+
+    #pk( 1 | c1)を求める
+    pk[0,1,9-j] = 1 - pk[0,0,9-j]
+
+    #pk( 0 | c2)を求める
+    for i in range(len(pk_all[0])):
+        num = str(format(i, '010b'))
+        if num[-j] == "0":
+            pk[1,0,9-j] += pk_all[1,i]
+
+    #pk( 1 | c2)を求める
+    pk[1,1,9-j] = 1 - pk[1,0,9-j]
+"""
+
+
+#C = [np.random.choice([0,1], p=[P1,P2]) for i in range(r)]  #クラスCの分布
+#for i in range(r):
+#    g += w[i+1] * C[i]
